@@ -1,6 +1,9 @@
 from flask import Flask, render_template, request, url_for
 import multical_const, utils
+
 import json, os
+from pathlib import Path
+from rosbags.highlevel import AnyReader as bagReader
 
 app = Flask(__name__)
 
@@ -23,8 +26,15 @@ def search_bags():
 
 @app.route('/api/analyze_bag', methods=['POST'])
 def analyze_bag():
-    os.path.join(request.form['filefolder'], request.form['filename'])
-
+    with bagReader([Path(os.path.join(request.form['filefolder'], request.form['filename']))]) as reader:
+        reader.open()
+        connections = [{"topic":x.topic,"msgtype":x.msgtype} for x in reader.connections if x.msgtype in ["sensor_msgs/msg/Imu",
+                                                                                                          "sensor_msgs/msg/CompressedImage",
+                                                                                                          "sensor_msgs/msg/Image",
+                                                                                                          "sensor_msgs/msg/PointCloud2"]]
+        reader.close()
+        return json.dumps(connections)
+    
 
 # @app.route('/login', methods=['POST', 'GET'])
 # def login():

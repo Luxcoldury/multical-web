@@ -1,4 +1,4 @@
-dataset_path = "D:\multical_dataset"
+dataset_path = "/home/bowen/multical_calibration_example_data"
 
 const_phrases = {
     "title" : "Multical - Calibrate Extrinsics Effortlessly",

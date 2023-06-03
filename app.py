@@ -27,12 +27,17 @@ def search_bags():
 @app.route('/api/analyze_bag', methods=['POST'])
 def analyze_bag():
     with bagReader([Path(os.path.join(request.form['filefolder'], request.form['filename']))]) as reader:
-        reader.open()
-        connections = [{"topic":x.topic,"msgtype":x.msgtype} for x in reader.connections if x.msgtype in ["sensor_msgs/msg/Imu",
-                                                                                                          "sensor_msgs/msg/CompressedImage",
-                                                                                                          "sensor_msgs/msg/Image",
-                                                                                                          "sensor_msgs/msg/PointCloud2"]]
-        reader.close()
+        connections = [{"bag_index":request.form['index'],"topic_index":x.id,"topic":x.topic,"msgtype":x.msgtype} for x in reader.connections if x.msgtype in ["sensor_msgs/msg/Imu",
+                                                                                                                                                               "sensor_msgs/msg/CompressedImage",
+                                                                                                                                                               "sensor_msgs/msg/Image",
+                                                                                                                                                               "sensor_msgs/msg/PointCloud2"]]
+        for connection in connections:
+            if connection["msgtype"]=="sensor_msgs/msg/PointCloud2":
+                connection["sensor_type"] = "lidar"
+            elif connection["msgtype"] in ["sensor_msgs/msg/CompressedImage", "sensor_msgs/msg/Image"]:
+                connection["sensor_type"] = "camera"
+            elif connection["msgtype"]=="sensor_msgs/msg/Imu":
+                connection["sensor_type"] = "imu"
         return json.dumps(connections)
     
 

@@ -1,1 +1,58 @@
-5
+<div class="align-items-center justify-content-center h-100 row g-4">
+    <div class="col-3" style="height: 90%;">
+        <div class="card" style="height: 100%;">
+            <div class="card-header text-center">
+                Target settings 
+              </div>
+            <div class="card-body" style="height: 25%;">
+              <h5 class="card-title">5 Tell Multical about your target boards</h5>
+              <p class="card-text">Multical use AprilGrid as its target boards. You can set the size of the board and the number of tags on the board.
+              </p>
+            </div>
+            <div class="list-group list-group-flush" id="step5-target-list" style="overflow-y:auto; height:80%">
+                <div class="list-group-item">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <div class="form-floating ">
+                                <input type="number" class="form-control form-control-sm" id="target-number" placeholder="Target boards count" value="11">
+                                <label for="target-number" >Target board count</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-group-item">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <div class="form-floating ">
+                                <input type="text" class="form-control form-control-sm" id="target-size" placeholder="Side length of each AprilTag (m)" value="0.08">
+                                <label for="target-size" >Size of each AprilTag</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-group-item">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <div class="form-floating ">
+                                <input type="text" class="form-control form-control-sm" id="target-space" placeholder="(Space between tags / Tag side length) Ratio" value="0.3">
+                                <label for="target-space" >(Space between tags / Tag side length) Ratio</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-group-item">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <div class="input-group">
+                                <span class="input-group-text"># of Cols / Rows in AprilGrid</span>
+                                <input type="number" class="form-control" placeholder="Col" aria-label="Col" value="6" id="target-col">
+                                <span class="input-group-text">*</span>
+                                <input type="number" class="form-control" placeholder="Row" aria-label="Row" value="6" id="target-row">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+    </div>
+</div>

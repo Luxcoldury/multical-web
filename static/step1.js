@@ -74,7 +74,7 @@ choose_rosbag = function(bag_index){
 refresh_topics_list = function(){
     $(`.step1-topic-list`).empty();
     topics.forEach(function(item){
-        $(`#step1-${item.sensor_type}-list`).append(`<div class="list-group-item list-group-item-action step1-${item.sensor_type}" id="step1-sensor-${item.bag_index}-${item.topic_index}">
+        $(`#step1-${item.sensor_type}-list`).append(`<div class="list-group-item list-group-item-action step1-${item.sensor_type}" id="step1-sensor-${item.bag_index}-${item.topic_index}" data-bag-index="${item.bag_index}" data-topic-index="${item.topic_index}">
         <a href="javascript:choose_topic(${item.bag_index},${item.topic_index})" class="stretched-link"></a>
         <div class="row align-items-center">
         <div class="col-12">
@@ -102,11 +102,11 @@ refresh_bag_count = function(){
 
 refresh_sensor_count = function(){
     $(".step1-camera-count").empty()
-    $(".step1-camera-count").append(`<span class="card-text"># of camera bags selected: ${$(".step1-camera.active").length}/${$(".step1-camera").length}</span>`)
+    $(".step1-camera-count").append(`<span class="card-text"># of camera topics selected: ${$(".step1-camera.active").length}/${$(".step1-camera").length}</span>`)
 
     $(".step1-lidar-count").empty()
-    $(".step1-lidar-count").append(`<span class="card-text"># of LiDAR bags selected: ${$(".step1-lidar.active").length}/${$(".step1-lidar").length}</span>`)
+    $(".step1-lidar-count").append(`<span class="card-text"># of LiDAR topics selected: ${$(".step1-lidar.active").length}/${$(".step1-lidar").length}</span>`)
 
     $(".step1-imu-count").empty()
-    $(".step1-imu-count").append(`<span class="card-text"># of IMU bags selected: ${$(".step1-imu.active").length}/${$(".step1-imu").length}</span>`)
+    $(".step1-imu-count").append(`<span class="card-text"># of IMU topics selected: ${$(".step1-imu.active").length}/${$(".step1-imu").length}</span>`)
 }

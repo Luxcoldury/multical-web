@@ -35,7 +35,7 @@ const_phrases = {
         },
         {
             "title" : "Calibration",
-            "description" : "We will now calibrate your extrinsics",
+            "description" : "Multical will now calibrate your extrinsics",
             "prev_btn_title" : "Back",
             "next_btn_title" : "Next",
         },

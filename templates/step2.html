@@ -1,1 +1,25 @@
-2
+<div class="align-items-center h-100 row row-cols-1 g-4">
+    <div class="col" style="height: 90%;">
+        <div class="card" style="height: 100%;">
+            <div class="card-header text-center">
+                IMU settings 
+              </div>
+            <div class="card-body" style="height: 25%;">
+              <h5 class="card-title">2 Tell Multical about your IMUs</h5>
+              <p class="card-text">IMU properties like noise density, random walk as well as the update rate are needed in extrinsic calibration. 
+                If you don't know the exact values, please check <a href="https://github.com/ori-drs/allan_variance_ros" class="card-link">this tool</a> which may make your life easier.
+              </p>
+            </div>
+            <div class="list-group list-group-flush" id="step2-imu-list" style="overflow-y:auto; height:80%">
+                <div class="list-group-item imu-placeholder" style="text-align: center;">
+                    <span class="card-text">You have not selected any IMUs. If you do not want to calibrate IMUs, feel free to continue to the next step.</span>
+                </div>
+            </div>
+            <div class="card-body step1-bag-count">
+              <span class="card-text"># of ROS bags selected: 0/0</span>
+            </div>
+          </div>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='step2.js') }}"></script>

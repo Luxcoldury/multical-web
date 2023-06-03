@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, url_for
 import multical_const, utils
 
-import json, os
+import json, os, yaml
 from pathlib import Path
 from rosbags.highlevel import AnyReader as bagReader
 
@@ -40,6 +40,32 @@ def analyze_bag():
                 connection["sensor_type"] = "imu"
         return json.dumps(connections)
     
+@app.route('/api/load_cam_configs_files', methods=['GET'])
+def load_cam_configs_files():
+    files = utils.list_files(multical_const.dataset_path)
+    cam_configs = []
+    for file in files:
+        if file["filename"].endswith(".yaml"):
+            with open(file["filefolder"]+'/'+file["filename"],"r") as f:
+                try:
+                    cam_config = {"camera_model":"pinhole","distortion_coeffs":{},"distortion_model":"","intrinsics":{},"resolution":{}}
+
+                    cam_config_src=yaml.load(f,Loader=yaml.FullLoader)
+                    if cam_config_src["distortion_model"]=="plumb_bob":
+                        cam_config["distortion_model"]="radtan"
+                    elif cam_config_src["distortion_model"]=="equidistant":           
+                        cam_config["distortion_model"]="equidistant"
+                    else:
+                        continue
+                    cam_config["distortion_coeffs"] = cam_config_src["distortion_coefficients"]["data"][:4]
+                    cam_config["intrinsics"] = [cam_config_src["camera_matrix"]["data"][i] for i in [0,4,2,5]]
+                    cam_config["resolution"] = [cam_config_src["image_width"],cam_config_src["image_height"]]
+                except:
+                    continue
+                else:
+                    cam_configs.append({"config_name":file["filename"],"config_folder":file["filefolder"],"config":cam_config})
+
+    return json.dumps(cam_configs)
 
 # @app.route('/login', methods=['POST', 'GET'])
 # def login():

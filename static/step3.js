@@ -1,8 +1,11 @@
+var external_cam_configs = [];
+
 document.getElementById('multical_carousel').addEventListener('slide.bs.carousel', event => {
     if(event.to==2){
       loadstep3();
+      get_external_cam_configs();
     }
-  })
+})
   
 loadstep3 = function(){
     $(".step3-camera-item").addClass("d-none")
@@ -46,13 +49,15 @@ step3_choose_camera = function(bag_index,topic_index){
 
     $(".step3-intrinsics-placeholder").addClass("d-none")
     $(".step3-intrinsics-item").addClass("d-none")    
+    $(".step3-intrinsics-item").removeClass("front")    
 
     if($(`#step3-intrinsics-${bag_index}-${topic_index}`).length>0){
         $(`#step3-intrinsics-${bag_index}-${topic_index}`).removeClass("d-none")
+        $(`#step3-intrinsics-${bag_index}-${topic_index}`).addClass("front")
         return
     }
 
-    $("#step3-intrinsics-list").append(`<div class="list-group-item step3-intrinsics-item" style="text-align: center; height:100%" id="step3-intrinsics-${bag_index}-${topic_index}">
+    $("#step3-intrinsics-list").append(`<div class="list-group-item step3-intrinsics-item front" style="text-align: center; height:100%" id="step3-intrinsics-${bag_index}-${topic_index}" data-bag-index="${bag_index}" data-topic-index="${topic_index}">
     <div class="row g-4 align-items-center">
         <div class="col-12">
             <table class="table table-bordered border-0" style="vertical-align:middle;">
@@ -134,6 +139,50 @@ step3_choose_camera = function(bag_index,topic_index){
     </div>
 
 </div>`)
+}
 
+get_external_cam_configs = function(){
+    $.get("/api/load_cam_configs_files",
+        function (data) {
+            external_cam_configs = data;
+            
+            if(external_cam_configs.length==0) return
+
+            $("#step3-intrinsics-file-list").empty()
+            for(i=0;i<external_cam_configs.length;i++){
+                cam_config = external_cam_configs[i]
+
+                $("#step3-intrinsics-file-list").append(`<div class="list-group-item list-group-item-action step3-intrinsics-file-item">
+                    <a href="javascript:apply_cam_config(${i})" class="stretched-link"></a>
+                    <div class="row align-items-center">
+                        <div class="col">
+                            ${cam_config.config_name}
+                            <div class="small">${cam_config.config_folder}</div>
+                        </div>
+                    </div>
+                </div>`);
+            }
+        },
+        "json"
+    );
+}
+
+apply_cam_config = function(index){
+    bi=$(".step3-intrinsics-item.front")[0].getAttribute("data-bag-index")
+    ti=$(".step3-intrinsics-item.front")[0].getAttribute("data-topic-index")
+
+    $(`#camera-${bi}-${ti}-fu`).val(external_cam_configs[index].config.intrinsics[0])
+    $(`#camera-${bi}-${ti}-fv`).val(external_cam_configs[index].config.intrinsics[1])
+    $(`#camera-${bi}-${ti}-pu`).val(external_cam_configs[index].config.intrinsics[2])
+    $(`#camera-${bi}-${ti}-pv`).val(external_cam_configs[index].config.intrinsics[3])
+
+    $(`#camera-${bi}-${ti}-width`).val(external_cam_configs[index].config.resolution[0])
+    $(`#camera-${bi}-${ti}-height`).val(external_cam_configs[index].config.resolution[1])
+
+    $(`#camera-${bi}-${ti}-distortion-model`).val(external_cam_configs[index].config.distortion_model)
+    $(`#camera-${bi}-${ti}-distortion-1`).val(external_cam_configs[index].config.distortion_coeffs[0])
+    $(`#camera-${bi}-${ti}-distortion-2`).val(external_cam_configs[index].config.distortion_coeffs[1])
+    $(`#camera-${bi}-${ti}-distortion-3`).val(external_cam_configs[index].config.distortion_coeffs[2])
+    $(`#camera-${bi}-${ti}-distortion-4`).val(external_cam_configs[index].config.distortion_coeffs[3])
 
 }

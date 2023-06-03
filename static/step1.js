@@ -79,7 +79,7 @@ refresh_topics_list = function(){
         <div class="row align-items-center">
         <div class="col-12">
         ${item.topic}
-        <div class="small">${item.msgtype}</div>
+        <div class="small"><mark>${item.msgtype}</mark></div>
         <div class="small">${bags[item.bag_index].bag_folder}/${bags[item.bag_index].bag_name}</div>
         </div>`);
     });

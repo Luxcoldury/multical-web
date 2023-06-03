@@ -64,7 +64,7 @@ step3_choose_camera = function(bag_index,topic_index){
                 <tbody>
                 <tr>
                     <td rowspan="3" class="w-25">Camera Matrix = </td>
-                    <td class="w-25" style="height: 70px;">
+                    <td class="w-25" style="height: 75px;">
                         <div class="form-floating">
                             <input type="text" class="form-control" id="camera-${bag_index}-${topic_index}-fu" placeholder="fu">
                             <label for="camera-${bag_index}-${topic_index}-fu" data-bag-index="${bag_index}" data-topic-index="${topic_index}">fu</label>
@@ -78,7 +78,7 @@ step3_choose_camera = function(bag_index,topic_index){
                         </div>
                     </td>
                 </tr>
-                <tr style="height: 70px;">
+                <tr style="height: 75px;">
                     <td class="table-active">0</td>
                     <td>
                         <div class="form-floating">
@@ -93,7 +93,7 @@ step3_choose_camera = function(bag_index,topic_index){
                         </div>
                     </td>
                 </tr>
-                <tr class="table-active" style="height: 70px;">
+                <tr class="table-active" style="height: 75px;">
                     <td>0</td>
                     <td>0</td>
                     <td>1</td>

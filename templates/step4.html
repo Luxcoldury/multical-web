@@ -1,1 +1,23 @@
-4
+<div class="align-items-center h-100 row row-cols-1 g-4">
+    <div class="col" style="height: 90%;">
+        <div class="card" style="height: 100%;">
+            <div class="card-header text-center">
+                LiDAR settings 
+              </div>
+            <div class="card-body" style="height: 25%;">
+              <h5 class="card-title">4 Tell Multical about your LiDARs</h5>
+              <p class="card-text">Actually there's not many setting about LiDARs.
+                Multical only needs to know if your pointcloud measurement has a relative timestamp (with respect to the stamp in header of each ROS message) or not.
+                You can also set the number of points reserved in each pointcloud frame.
+              </p>
+            </div>
+            <div class="list-group list-group-flush" id="step4-lidar-list" style="overflow-y:auto; height:80%">
+                <div class="list-group-item step4-lidar-placeholder" style="text-align: center;">
+                    <span class="card-text">You have not selected any LiDARs.</span>
+                </div>
+            </div>
+          </div>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='step4.js') }}"></script>

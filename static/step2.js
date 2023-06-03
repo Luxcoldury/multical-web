@@ -32,31 +32,31 @@ loadstep2 = function(){
                     <div class="small">${bags[item.bag_index].bag_folder}</div>
                 </div>
                 <div class="col-2">
-                    <div class="form-floating mb-3">
+                    <div class="form-floating ">
                         <input type="text" class="form-control" id="imu-${item.bag_index}-${item.topic_index}-and" placeholder="Accelerometer Noise Density">
                         <label for="imu-${item.bag_index}-${item.topic_index}-and" data-bag-index="${item.bag_index}" data-topic-index="${item.topic_index}">Accelerometer Noise Density</label>
                     </div>
                 </div>
                 <div class="col-2">
-                    <div class="form-floating mb-3">
+                    <div class="form-floating ">
                         <input type="text" class="form-control" id="imu-${item.bag_index}-${item.topic_index}-arw" placeholder="Accelerometer Random Walk">
                         <label for="imu-${item.bag_index}-${item.topic_index}-arw" data-bag-index="${item.bag_index}" data-topic-index="${item.topic_index}">Accelerometer Random Walk</label>
                     </div>
                 </div>
                 <div class="col-2">
-                    <div class="form-floating mb-3">
+                    <div class="form-floating ">
                         <input type="text" class="form-control" id="imu-${item.bag_index}-${item.topic_index}-gnd" placeholder="Gyroscope Noise Density">
                         <label for="imu-${item.bag_index}-${item.topic_index}-gnd" data-bag-index="${item.bag_index}" data-topic-index="${item.topic_index}">Gyroscope Noise Density</label>
                     </div>
                 </div>
                 <div class="col-2">
-                    <div class="form-floating mb-3">
+                    <div class="form-floating ">
                         <input type="text" class="form-control" id="imu-${item.bag_index}-${item.topic_index}-grw" placeholder="Gyroscope Random Walk">
                         <label for="imu-${item.bag_index}-${item.topic_index}-grw" data-bag-index="${item.bag_index}" data-topic-index="${item.topic_index}">Gyroscope Random Walk</label>
                     </div>
                 </div>
                 <div class="col-2">
-                    <div class="form-floating mb-3">
+                    <div class="form-floating ">
                         <input type="text" class="form-control" id="imu-${item.bag_index}-${item.topic_index}-rate" placeholder="Update Rate">
                         <label for="imu-${item.bag_index}-${item.topic_index}-rate" data-bag-index="${item.bag_index}" data-topic-index="${item.topic_index}">Update Rate</label>
                     </div>

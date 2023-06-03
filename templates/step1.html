@@ -1,0 +1,28 @@
+<div class="align-items-center h-100 row row-cols-1 row-cols-md-4 g-4">
+
+    <div class="col" style="height: 90%;">
+        <div class="card" style="height: 100%;">
+            <div class="card-header text-center">
+                Data source
+              </div>
+            <div class="card-body" style="height: 25%;">
+              <h5 class="card-title">Select ROS bags</h5>
+              <p class="card-text">Here are the ROS bags detected in the mounted folder.
+                Please click on the ones you want to use for calibration.
+                The ROS bags you select will be analyzed.
+                You can also select multiple bags if you record your data in separate ones.</p>
+            </div>
+            <div class="list-group list-group-flush" id="step1-rosbag-list" style="overflow-y:auto; height:80%">
+                
+            </div>
+            <div class="card-body">
+              <a href="#" class="card-link">Card link</a>
+              <a href="#" class="card-link">Another link</a>
+            </div>
+          </div>
+    </div>
+
+</div>
+
+
+<script src="{{ url_for('static', filename='step1.js') }}"></script>

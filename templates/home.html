@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+  <header>
+      <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+      
+      <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.2.3/js/bootstrap.bundle.min.js"></script>
+      <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.2.3/css/bootstrap.min.css" rel="stylesheet">
+      
+      <script src="https://cdn.jsdelivr.net/npm/xterm@5.1.0/lib/xterm.min.js"></script>
+      <link href="https://cdn.jsdelivr.net/npm/xterm@5.1.0/css/xterm.min.css" rel="stylesheet">
+
+      <script src="https://unpkg.com/human-format@1/index.js"></script>
+      <title>{{ const_phrases.title }}</title>
+  </header>
+
+  <body>
+    <!-- header nav bar -->
+    <header class="p-3 text-bg-dark">
+      <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+          <div class="col-md-3 mb-2 mb-md-0"></div>
+          <div class="nav col-md-6 mb-2 align-items-center justify-content-center">
+            <li><a href="#" class="nav-link fs-4 text-white ">{{ const_phrases.title }}</a></li>
+          </div>
+          <div class="col-md-3 mb-2 mb-md-0"></div>
+        </div>
+      </div>
+    </header>
+
+    <!-- main body -->
+    <div id="multical_carousel" class="carousel slide" style="height: 90vh !important;">
+
+      <div class="carousel-indicators">
+        {%for i in range(const_phrases.step.__len__())%}
+          <button type="button" data-bs-target="#multical_carousel" data-bs-slide-to="{{i}}" class="{%if i == 0%}active{%endif%}" aria-current="true" aria-label="Slide {{i+1}}" style="background-color: lightgray;"></button>
+        {%endfor%}
+      </div>
+
+      <div class="carousel-inner h-100">
+        {%for i in range(const_phrases.step.__len__())%}
+        <div class="carousel-item container-fluid h-100 {%if i == 0%}active{%endif%}">
+          <!-- <div class="container-fluid h-100"> -->
+            
+            <!-- step operations -->
+            <div class="container-fluid" style="height: 85%;">
+              {% include 'step{0}.html'.format(i+1) %}
+            </div>
+
+            <!-- step title, prev&next -->
+            <div class="row justify-content-between text-center align-items-center" style="height: 10%;">
+              <div class="col-2">
+                {%if i != 0%}
+                <button type="button" class="btn btn-secondary"data-bs-target="#multical_carousel" data-bs-slide="prev">{{ const_phrases.step[i].prev_btn_title }}</button>
+                {%endif%}
+              </div>
+              <div class="col-8">
+                <h5>Step {{i+1}}: {{ const_phrases.step[i].title }}</h5>
+                <p>{{ const_phrases.step[i].description }}</p>
+              </div>
+              <div class="col-2">
+                {%if i != const_phrases.step.__len__()-1%}
+                <button type="button" class="btn {%if i == const_phrases.step.__len__()-2%} btn-success {%else%} btn-primary {%endif%}"data-bs-target="#multical_carousel" data-bs-slide="next">{{ const_phrases.step[i].next_btn_title }}</button>
+                {%endif%}
+              </div>
+            </div>
+
+          <!-- </div> -->
+        </div>
+        {%endfor%}
+      </div>
+      
+    </div>
+
+    <!-- <footer class="container">
+      <p class="float-end"><a href="#">Back to top</a></p>
+      <p>&copy; 2017–2023 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+    </footer> -->
+
+    <!-- <div id="terminal"></div>
+    
+    <script>
+      var term = new Terminal();
+      term.open(document.getElementById('terminal'));
+      term.write('Hello from \x1B[1;3;31mxterm.js\x1B[0m $ ')
+    </script> -->
+
+  </body>
+</html>

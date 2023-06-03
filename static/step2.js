@@ -1,5 +1,5 @@
 document.getElementById('multical_carousel').addEventListener('slide.bs.carousel', event => {
-  if(event.to==1&&event.from==0){
+  if(event.to==1){
     loadstep2();
   }
 })
@@ -16,40 +16,50 @@ loadstep2 = function(){
     for(i=0;i<$(".step1-imu.active").length;i++){
         bi=$(".step1-imu.active")[i].getAttribute("data-bag-index")
         ti=$(".step1-imu.active")[i].getAttribute("data-topic-index")
-        imu_topic = topics.filter(function(item) {
-            return item.bag_index == bi && item.topic_index == ti;
+        item = topics.filter(function(topic) {
+            return topic.bag_index == bi && topic.topic_index == ti;
         })[0]
 
-        if($(`#step2-imu-${imu_topic.bag_index}-${imu_topic.topic_index}`).length!=0){
-            $(".step2-imu-item").removeClass("d-none")
+        if($(`#step2-imu-${item.bag_index}-${item.topic_index}`).length!=0){
+            $(`#step2-imu-${item.bag_index}-${item.topic_index}`).removeClass("d-none")
             continue
         }
 
-        $("#step2-imu-list").append(`<div class="list-group-item step2-imu-item" data-bag-index="${imu_topic.bag_index}" data-topic-index="${imu_topic.topic_index}" id="step2-imu-${imu_topic.bag_index}-${imu_topic.topic_index}">
+        $("#step2-imu-list").append(`<div class="list-group-item step2-imu-item" data-bag-index="${item.bag_index}" data-topic-index="${item.topic_index}" id="step2-imu-${item.bag_index}-${item.topic_index}">
             <div class="row align-items-center">
                 <div class="col-2">
-                    ${imu_topic.topic}
-                    <div class="small">${bags[imu_topic.bag_index].bag_folder}</div>
+                    ${item.topic}
+                    <div class="small">${bags[item.bag_index].bag_folder}</div>
                 </div>
                 <div class="col-2">
-                    <label for="imu_${imu_topic.bag_index}_${imu_topic.topic_index}_and" class="form-label" data-bag-index="${imu_topic.bag_index}" data-topic-index="${imu_topic.topic_index}">Accelerometer Noise Density ${and_symbol}</label>
-                    <input type="text" class="form-control" id="imu_${imu_topic.bag_index}_${imu_topic.topic_index}_and" placeholder="Accelerometer Noise Density">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="imu-${item.bag_index}-${item.topic_index}-and" placeholder="Accelerometer Noise Density">
+                        <label for="imu-${item.bag_index}-${item.topic_index}-and" data-bag-index="${item.bag_index}" data-topic-index="${item.topic_index}">Accelerometer Noise Density</label>
+                    </div>
                 </div>
                 <div class="col-2">
-                    <label for="imu_${imu_topic.bag_index}_${imu_topic.topic_index}_arw" class="form-label" data-bag-index="${imu_topic.bag_index}" data-topic-index="${imu_topic.topic_index}">Accelerometer Random Walk ${arw_symbol}</label>
-                    <input type="text" class="form-control" id="imu_${imu_topic.bag_index}_${imu_topic.topic_index}_arw" placeholder="Accelerometer Random Walk">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="imu-${item.bag_index}-${item.topic_index}-arw" placeholder="Accelerometer Random Walk">
+                        <label for="imu-${item.bag_index}-${item.topic_index}-arw" data-bag-index="${item.bag_index}" data-topic-index="${item.topic_index}">Accelerometer Random Walk</label>
+                    </div>
                 </div>
                 <div class="col-2">
-                    <label for="imu_${imu_topic.bag_index}_${imu_topic.topic_index}_gnd" class="form-label" data-bag-index="${imu_topic.bag_index}" data-topic-index="${imu_topic.topic_index}">Gyroscope Noise Density ${gnd_symbol}</label>
-                    <input type="text" class="form-control" id="imu_${imu_topic.bag_index}_${imu_topic.topic_index}_gnd" placeholder="Gyroscope Noise Density">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="imu-${item.bag_index}-${item.topic_index}-gnd" placeholder="Gyroscope Noise Density">
+                        <label for="imu-${item.bag_index}-${item.topic_index}-gnd" data-bag-index="${item.bag_index}" data-topic-index="${item.topic_index}">Gyroscope Noise Density</label>
+                    </div>
                 </div>
                 <div class="col-2">
-                    <label for="imu_${imu_topic.bag_index}_${imu_topic.topic_index}_grw" class="form-label" data-bag-index="${imu_topic.bag_index}" data-topic-index="${imu_topic.topic_index}">Gyroscope Random Walk ${grw_symbol}</label>
-                    <input type="text" class="form-control" id="imu_${imu_topic.bag_index}_${imu_topic.topic_index}_grw" placeholder="Gyroscope Random Walk">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="imu-${item.bag_index}-${item.topic_index}-grw" placeholder="Gyroscope Random Walk">
+                        <label for="imu-${item.bag_index}-${item.topic_index}-grw" data-bag-index="${item.bag_index}" data-topic-index="${item.topic_index}">Gyroscope Random Walk</label>
+                    </div>
                 </div>
                 <div class="col-2">
-                    <label for="imu_${imu_topic.bag_index}_${imu_topic.topic_index}_rate" class="form-label" data-bag-index="${imu_topic.bag_index}" data-topic-index="${imu_topic.topic_index}">Update Rate f(Hz)</label>
-                    <input type="text" class="form-control" id="imu_${imu_topic.bag_index}_${imu_topic.topic_index}_rate" placeholder="Update Rate">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="imu-${item.bag_index}-${item.topic_index}-rate" placeholder="Update Rate">
+                        <label for="imu-${item.bag_index}-${item.topic_index}-rate" data-bag-index="${item.bag_index}" data-topic-index="${item.topic_index}">Update Rate</label>
+                    </div>
                 </div>
             </div>
         </div>`);

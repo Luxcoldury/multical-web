@@ -86,9 +86,9 @@ def start_task():
         with open(task_folder+"/imus.yaml",'w') as f:
             f.write(yaml.dump(task["imus"]).replace("'",""))
     with open(task_folder+"/lidars.yaml",'w') as f:
-        f.write(yaml.dump(task["lidars"].replace("'",""))
+        f.write(yaml.dump(task["lidars"]).replace("'",""))
     with open(task_folder+"/target.yaml",'w') as f:
-        f.write(yaml.dump(task["target"].replace("'",""))
+        f.write(yaml.dump(task["target"]).replace("'",""))
 
     with open(task_folder+'/run.bash', 'w') as f:
         f.write("""

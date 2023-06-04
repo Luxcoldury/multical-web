@@ -113,9 +113,9 @@ step3_choose_camera = function(bag_index,topic_index){
         <div class="col-9">
             <div class="input-group mb-3">
                 <span class="input-group-text">Resolution</span>
-                <input type="text" class="form-control" placeholder="Width" aria-label="Width" id="camera-${bag_index}-${topic_index}-width">
+                <input type="number" class="form-control" placeholder="Width" aria-label="Width" id="camera-${bag_index}-${topic_index}-width">
                 <span class="input-group-text">*</span>
-                <input type="text" class="form-control" placeholder="Height" aria-label="Height" id="camera-${bag_index}-${topic_index}-height">
+                <input type="number" class="form-control" placeholder="Height" aria-label="Height" id="camera-${bag_index}-${topic_index}-height">
             </div>
         </div>
     </div>
@@ -179,7 +179,7 @@ apply_cam_config = function(index){
     $(`#camera-${bi}-${ti}-width`).val(external_cam_configs[index].config.resolution[0])
     $(`#camera-${bi}-${ti}-height`).val(external_cam_configs[index].config.resolution[1])
 
-    $(`#camera-${bi}-${ti}-distortion-model`).val(external_cam_configs[index].config.distortion_model)
+    $(`#camera-${bi}-${ti}-distortion-model-${external_cam_configs[index].config.distortion_model}`).prop('checked',true)    
     $(`#camera-${bi}-${ti}-distortion-1`).val(external_cam_configs[index].config.distortion_coeffs[0])
     $(`#camera-${bi}-${ti}-distortion-2`).val(external_cam_configs[index].config.distortion_coeffs[1])
     $(`#camera-${bi}-${ti}-distortion-3`).val(external_cam_configs[index].config.distortion_coeffs[2])

@@ -4,6 +4,7 @@ import multical_const, utils
 import json, os, yaml
 from pathlib import Path
 from rosbags.highlevel import AnyReader as bagReader
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -66,6 +67,35 @@ def load_cam_configs_files():
                     cam_configs.append({"config_name":file["filename"],"config_folder":file["filefolder"],"config":cam_config})
 
     return json.dumps(cam_configs)
+
+@app.route('/api/start_task', methods=['POST'])
+def start_task():
+    folder = "/home/bowen/multical-web-playground/"
+    task = json.loads(request.form["data"])
+
+    task_folder = folder+str(datetime.now().strftime("%Y%m%d-%H%M%S"))
+    os.mkdir(task_folder);
+
+    # print(task)
+    with open(task_folder+"/cameras.yaml",'w') as f:
+        yaml.dump(task["cameras"],f,encoding='utf-8')
+    if task["imus"].__len__()>0:
+        with open(task_folder+"/imus.yaml",'w') as f:
+            yaml.dump(task["imus"],f,encoding='utf-8')
+    with open(task_folder+"/lidars.yaml",'w') as f:
+        yaml.dump(task["lidars"],f,encoding='utf-8')
+    with open(task_folder+"/target.yaml",'w') as f:
+        yaml.dump(task["target"],f,encoding='utf-8')
+
+    with open(task_folder+'/run.bash', 'w') as f:
+        f.write("""
+#/bin/bash
+source /catkin_ws/devel/setup.bash
+multical_calibrate_sensors --bag {0} --cams cameras.yaml {1} --lidars lidars.yaml --target target.yaml --no-time-calibration \
+2>&1 | tee $1.log
+""".format(task["cameras"]["cam0"]["rosbag"], "--imus imus.yaml" if task["imus"].__len__()>0 else ""))
+
+    
 
 # @app.route('/login', methods=['POST', 'GET'])
 # def login():

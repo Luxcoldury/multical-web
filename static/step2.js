@@ -57,7 +57,7 @@ loadstep2 = function(){
                 </div>
                 <div class="col-2">
                     <div class="form-floating ">
-                        <input type="text" class="form-control" id="imu-${item.bag_index}-${item.topic_index}-rate" placeholder="Update Rate">
+                        <input type="number" class="form-control" id="imu-${item.bag_index}-${item.topic_index}-rate" placeholder="Update Rate">
                         <label for="imu-${item.bag_index}-${item.topic_index}-rate" data-bag-index="${item.bag_index}" data-topic-index="${item.topic_index}">Update Rate</label>
                     </div>
                 </div>

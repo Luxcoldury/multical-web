@@ -71,10 +71,12 @@ def load_cam_configs_files():
 
 @app.route('/api/start_task', methods=['POST'])
 def start_task():
-    folder = "/home/bowen/multical-web-playground/"
+    folder = multical_const.dataset_path
     task = json.loads(request.form["data"])
 
-    task_folder = folder+str(datetime.now().strftime("%Y%m%d-%H%M%S"))
+    task_id = str(datetime.now().strftime("%Y%m%d-%H%M%S"))
+
+    task_folder = folder+"/"+task_id
     os.mkdir(task_folder);
 
     # print(task)
@@ -92,19 +94,28 @@ def start_task():
         f.write("""
 #/bin/bash
 source /catkin_ws/devel/setup.bash
-multical_calibrate_sensors --bag {0} --cams cameras.yaml {1} --lidars lidars.yaml --target target.yaml --no-time-calibration \
-2>&1 | tee $1.log
-""".format(task["cameras"]["cam0"]["rosbag"], "--imus imus.yaml" if task["imus"].__len__()>0 else ""))
-        
+nohup multical_calibrate_sensors --bag {0} --cams {1}/cameras.yaml {2} --lidars {1}/lidars.yaml --target {1}/target.yaml --no-time-calibration --max-iter=300 \
+> {1}/multical_output.log 2>&1 &
+""".format(task["cameras"]["cam0"]["rosbag"], task_folder, "--imus "+task_folder+"/imus.yaml" if task["imus"].__len__()>0 else ""))
 
-subprocess_list = []
+    subprocess.Popen(["/bin/bash",task_folder+"/run.bash"], shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    return task_id
 
-@app.route('/api/start_task_test')
-def start_task_test():
-    p = subprocess.Popen(["/bin/bash","pro.sh"], shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    subprocess_list.append(p)
-    return str(subprocess_list.index(p))
+@app.route('/api/fetch_output/<string:task_id>/<int:begin>')
+def fetch_output(task_id,begin):
+    task_folder = multical_const.dataset_path+"/"+task_id
+    with open(task_folder+"/multical_output.log",'r') as f:
+        f.seek(begin)
+        return json.dumps({"output":f.read(),"end":f.tell()})
 
-@app.route('/api/fetch_output_test/<int:index>')
-def fetch_output_test(index):
-    return subprocess_list[index].stdout.readline()
+# subprocess_list = []
+
+# @app.route('/api/start_task_test')
+# def start_task_test():
+#     p = subprocess.Popen(["/bin/bash","pro.sh"], shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+#     subprocess_list.append(p)
+#     return str(subprocess_list.index(p))
+
+# @app.route('/api/fetch_output_test/<int:index>')
+# def fetch_output_test(index):
+#     return subprocess_list[index].stdout.readline()

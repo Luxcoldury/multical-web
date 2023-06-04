@@ -47,7 +47,7 @@ generate_calibration_task = function(){
             gyroscope_noise_density:        $(`#imu-${bi}-${ti}-gnd`).val(),
             gyroscope_random_walk:          $(`#imu-${bi}-${ti}-grw`).val(),
             
-            rosbag:                         bags[bi].bag_folder+bags[bi].bag_name,
+            rosbag:                         bags[bi].bag_folder+"/"+bags[bi].bag_name,
             rostopic:                       item.topic,
             update_rate:                    $(`#imu-${bi}-${ti}-rate`).val(),
             model:                          "calibrated",
@@ -65,7 +65,7 @@ generate_calibration_task = function(){
         })[0]
         
         lidar = {
-            rosbag:                    bags[bi].bag_folder+bags[bi].bag_name,
+            rosbag:                    bags[bi].bag_folder+"/"+bags[bi].bag_name,
             rostopic:                  item.topic,
 
             relative_point_timestamp:  $(`#lidar-${bi}-${ti}-rt-true:checked`).val()=="on",
@@ -103,7 +103,7 @@ generate_calibration_task = function(){
                                     $(`#camera-${bi}-${ti}-width`).val(),
                                     $(`#camera-${bi}-${ti}-height`).val(),
                                 ],
-            rosbag:             bags[bi].bag_folder+bags[bi].bag_name,
+            rosbag:             bags[bi].bag_folder+"/"+bags[bi].bag_name,
             rostopic:           item.topic,
         }
 

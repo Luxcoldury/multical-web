@@ -122,7 +122,7 @@ generate_calibration_task = function(){
     $.post("/api/start_task",  {data:JSON.stringify(task)},
         function (data) {
             task_no = data.task_no;
-            setInterval(update_progress, 500);
+            setInterval(update_progress, 1000);
         },
         "json"
     );
@@ -132,11 +132,14 @@ var task_no = "";
 var offset = 0;
 
 update_progress = function(){
-    $.get(`/api/fetch_output/${task_no}/${offset}`,
-        function (data) {
-            term.write(data.output.replace(/\n/g,"\r\n"));
-            offset = data.end;
-        },
-        "json"
-    );
+    $.ajax({
+        method: "GET",
+        url: `/api/fetch_output/${task_no}/${offset}`,
+        dataType: "json",
+        timeout: 500,
+      })
+    .done(function( data ) {
+        term.write(data.output.replace(/\n/g,"\r\n"));
+        offset = data.end;
+    });
 }

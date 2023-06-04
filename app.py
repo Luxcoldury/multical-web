@@ -99,7 +99,7 @@ nohup multical_calibrate_sensors --bag {0} --cams {1}/cameras.yaml {2} --lidars 
 """.format(task["cameras"]["cam0"]["rosbag"], task_folder, "--imus "+task_folder+"/imus.yaml" if task["imus"].__len__()>0 else ""))
 
     subprocess.Popen(["/bin/bash",task_folder+"/run.bash"], shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    return task_id
+    return json.dumps({"task_no":task_id})
 
 @app.route('/api/fetch_output/<string:task_id>/<int:begin>')
 def fetch_output(task_id,begin):

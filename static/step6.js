@@ -119,5 +119,22 @@ generate_calibration_task = function(){
 
     console.log(task)
 
-    $.post("/api/start_task",  {data:JSON.stringify(task)})
+    $.post("/api/start_task",  {data:JSON.stringify(task)},
+        function (data) {
+            setInterval(update_progress(data.task_no), 500);
+        },
+        "json"
+    );
+}
+
+var offset = 0;
+
+function update_progress(task_no){
+    $.get(`/api/fetch_output/${task_no}/${offset}`,
+        function (data) {
+            term.write(data.output.replace(/\n/g,"\r\n"));
+            offset = data.end;
+        },
+        "json"
+    );
 }

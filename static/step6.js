@@ -92,7 +92,7 @@ generate_calibration_task = function(){
                                     $(`#camera-${bi}-${ti}-distortion-4`).val(),
                                 ],
             distortion_model:   $(`#camera-${bi}-${ti}-distortion-model-radtan:checked`).val() ? "radtan" : 
-                                $(`#camera-${bi}-${ti}-distortion-model-equi:checked`).val() ? "equi" : "",
+                                $(`#camera-${bi}-${ti}-distortion-model-equidistant:checked`).val() ? "equidistant" : "",
             intrinsics:         [
                                     $(`#camera-${bi}-${ti}-fu`).val(),
                                     $(`#camera-${bi}-${ti}-fv`).val(),

@@ -127,8 +127,8 @@ step3_choose_camera = function(bag_index,topic_index){
                 <span class="input-group-text">Distortion Model</span>
                 <input type="radio" class="btn-check" name="camera-${bag_index}-${topic_index}-distortion-model" id="camera-${bag_index}-${topic_index}-distortion-model-radtan" autocomplete="off" checked>
                 <label class="btn btn-outline-secondary" for="camera-${bag_index}-${topic_index}-distortion-model-radtan">radtan</label>
-                <input type="radio" class="btn-check" name="camera-${bag_index}-${topic_index}-distortion-model" id="camera-${bag_index}-${topic_index}-distortion-model-equi" autocomplete="off">
-                <label class="btn btn-outline-secondary" for="camera-${bag_index}-${topic_index}-distortion-model-equi">equi</label>
+                <input type="radio" class="btn-check" name="camera-${bag_index}-${topic_index}-distortion-model" id="camera-${bag_index}-${topic_index}-distortion-model-equidistant" autocomplete="off">
+                <label class="btn btn-outline-secondary" for="camera-${bag_index}-${topic_index}-distortion-model-equidistant">equi</label>
                 <span class="input-group-text">Coefficients</span>
                 <input type="text" class="form-control" id="camera-${bag_index}-${topic_index}-distortion-1">
                 <input type="text" class="form-control" id="camera-${bag_index}-${topic_index}-distortion-2">

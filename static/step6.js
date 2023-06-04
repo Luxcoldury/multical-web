@@ -121,15 +121,17 @@ generate_calibration_task = function(){
 
     $.post("/api/start_task",  {data:JSON.stringify(task)},
         function (data) {
-            setInterval(update_progress(data.task_no), 500);
+            task_no = data.task_no;
+            setInterval(update_progress, 500);
         },
         "json"
     );
 }
 
+var task_no = "";
 var offset = 0;
 
-function update_progress(task_no){
+update_progress = function(){
     $.get(`/api/fetch_output/${task_no}/${offset}`,
         function (data) {
             term.write(data.output.replace(/\n/g,"\r\n"));

@@ -1,4 +1,6 @@
-dataset_path = "/home/bowen/multical_calibration_example_data"
+import os
+
+dataset_path = os.environ['MULTICAL_DATASET']
 
 const_phrases = {
     "title" : "Multical - Calibrate Extrinsics Effortlessly",

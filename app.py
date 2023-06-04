@@ -104,6 +104,6 @@ nohup multical_calibrate_sensors --bag {0} --cams {1}/cameras.yaml {2} --lidars 
 @app.route('/api/fetch_output/<string:task_id>/<int:begin>')
 def fetch_output(task_id,begin):
     task_folder = multical_const.dataset_path+"/"+task_id
-    with open(task_folder+"/multical_output.log",'r') as f:
+    with open(task_folder+"/multical_output.log",'rb') as f:
         f.seek(begin)
-        return json.dumps({"output":f.read(),"end":f.tell()})
+        return json.dumps({"output":f.read().decode(),"end":f.tell()})

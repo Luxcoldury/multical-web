@@ -81,14 +81,14 @@ def start_task():
 
     # print(task)
     with open(task_folder+"/cameras.yaml",'w') as f:
-        yaml.dump(task["cameras"],f,encoding='utf-8')
+        f.write(yaml.dump(task["cameras"]).replace("'",""))
     if task["imus"].__len__()>0:
         with open(task_folder+"/imus.yaml",'w') as f:
-            yaml.dump(task["imus"],f,encoding='utf-8')
+            f.write(yaml.dump(task["imus"]).replace("'",""))
     with open(task_folder+"/lidars.yaml",'w') as f:
-        yaml.dump(task["lidars"],f,encoding='utf-8')
+        f.write(yaml.dump(task["lidars"].replace("'",""))
     with open(task_folder+"/target.yaml",'w') as f:
-        yaml.dump(task["target"],f,encoding='utf-8')
+        f.write(yaml.dump(task["target"].replace("'",""))
 
     with open(task_folder+'/run.bash', 'w') as f:
         f.write("""
@@ -107,15 +107,3 @@ def fetch_output(task_id,begin):
     with open(task_folder+"/multical_output.log",'r') as f:
         f.seek(begin)
         return json.dumps({"output":f.read(),"end":f.tell()})
-
-# subprocess_list = []
-
-# @app.route('/api/start_task_test')
-# def start_task_test():
-#     p = subprocess.Popen(["/bin/bash","pro.sh"], shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-#     subprocess_list.append(p)
-#     return str(subprocess_list.index(p))
-
-# @app.route('/api/fetch_output_test/<int:index>')
-# def fetch_output_test(index):
-#     return subprocess_list[index].stdout.readline()

@@ -132,6 +132,7 @@ var task_no = "";
 var offset = 0;
 
 update_progress = function(){
+    fitAddon.fit()
     $.ajax({
         method: "GET",
         url: `/api/fetch_output/${task_no}/${offset}`,

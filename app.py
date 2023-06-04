@@ -5,6 +5,7 @@ import json, os, yaml
 from pathlib import Path
 from rosbags.highlevel import AnyReader as bagReader
 from datetime import datetime
+import subprocess
 
 app = Flask(__name__)
 
@@ -94,18 +95,16 @@ source /catkin_ws/devel/setup.bash
 multical_calibrate_sensors --bag {0} --cams cameras.yaml {1} --lidars lidars.yaml --target target.yaml --no-time-calibration \
 2>&1 | tee $1.log
 """.format(task["cameras"]["cam0"]["rosbag"], "--imus imus.yaml" if task["imus"].__len__()>0 else ""))
+        
 
-    
+subprocess_list = []
 
-# @app.route('/login', methods=['POST', 'GET'])
-# def login():
-#     error = None
-#     if request.method == 'POST':
-#         if valid_login(request.form['username'],
-#                        request.form['password']):
-#             return log_the_user_in(request.form['username'])
-#         else:
-#             error = 'Invalid username/password'
-#     # the code below is executed if the request method
-#     # was GET or the credentials were invalid
-#     return render_template('login.html', error=error)
+@app.route('/api/start_task_test')
+def start_task_test():
+    p = subprocess.Popen(["/bin/bash","pro.sh"], shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    subprocess_list.append(p)
+    return str(subprocess_list.index(p))
+
+@app.route('/api/fetch_output_test/<int:index>')
+def fetch_output_test(index):
+    return subprocess_list[index].stdout.readline()

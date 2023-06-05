@@ -3,6 +3,7 @@ var external_imu_configs = [];
 document.getElementById('multical_carousel').addEventListener('slide.bs.carousel', event => {
   if(event.to==1){
     loadstep2();
+    get_external_imu_configs();
   }
 })
 
@@ -87,7 +88,7 @@ get_external_imu_configs = function(){
                 imu_config = external_imu_configs[i]
 
                 $("#step2-rw-file-list").append(`<div class="list-group-item list-group-item-action step2-rw-file-item">
-                    <a href="javascript:apply_imu_config()" class="stretched-link"></a>
+                    <a href="javascript:apply_imu_config(${i})" class="stretched-link"></a>
                     <div class="row align-items-center">
                         <div class="col">
                             ${imu_config.config_name}

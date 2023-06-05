@@ -1,4 +1,5 @@
 var external_imu_configs = [];
+var imu_config_selected_for_applying = {}
 
 document.getElementById('multical_carousel').addEventListener('slide.bs.carousel', event => {
   if(event.to==1){
@@ -58,11 +59,14 @@ loadstep2 = function(){
                         <label for="imu-${item.bag_index}-${item.topic_index}-grw" data-bag-index="${item.bag_index}" data-topic-index="${item.topic_index}">Gyroscope Random Walk</label>
                     </div>
                 </div>
-                <div class="col-2">
+                <div class="col-2 step2-imu-ur-col">
                     <div class="form-floating ">
                         <input type="number" class="form-control" id="imu-${item.bag_index}-${item.topic_index}-rate" placeholder="Update Rate">
                         <label for="imu-${item.bag_index}-${item.topic_index}-rate" data-bag-index="${item.bag_index}" data-topic-index="${item.topic_index}">Update Rate</label>
                     </div>
+                </div>
+                <div class="col-1 step2-imu-apply-config-col d-none">
+                    <button type="button" class="btn btn-primary" href="apply_imu_config_to(${item.bag_index},${item.topic_index})">Apply</button>
                 </div>
             </div>
         </div>`);
@@ -88,7 +92,7 @@ get_external_imu_configs = function(){
                 imu_config = external_imu_configs[i]
 
                 $("#step2-rw-file-list").append(`<div class="list-group-item list-group-item-action step2-rw-file-item">
-                    <a href="javascript:apply_imu_config(${i})" class="stretched-link"></a>
+                    <a href="javascript:select_imu_config_for_applying(${i})" class="stretched-link"></a>
                     <div class="row align-items-center">
                         <div class="col">
                             ${imu_config.config_name}
@@ -110,4 +114,22 @@ apply_imu_config = function(index){
     $(`#imu-${bi}-${ti}-arw`).val(external_imu_configs[index].config.arw)
     $(`#imu-${bi}-${ti}-gnd`).val(external_imu_configs[index].config.gnd)
     $(`#imu-${bi}-${ti}-grw`).val(external_imu_configs[index].config.grw)
+}
+
+select_imu_config_for_applying = function(index){
+    imu_config_selected_for_applying = external_imu_configs[index]
+    $(".step2-imu-ur-col").removeClass("col-2")
+    $(".step2-imu-ur-col").addClass("col-1")
+    $("step2-imu-apply-config-col").removeClass("d-none")
+}
+
+apply_imu_config_to = function(bi,ti){
+    $(".step2-imu-ur-col").addClass("col-2")
+    $(".step2-imu-ur-col").removeClass("col-1")
+    $("step2-imu-apply-config-col").addClass("d-none")
+
+    $(`#imu-${bi}-${ti}-and`).val(imu_config_selected_for_applying.config.and)
+    $(`#imu-${bi}-${ti}-arw`).val(imu_config_selected_for_applying.config.arw)
+    $(`#imu-${bi}-${ti}-gnd`).val(imu_config_selected_for_applying.config.gnd)
+    $(`#imu-${bi}-${ti}-grw`).val(imu_config_selected_for_applying.config.grw)
 }

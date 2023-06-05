@@ -117,12 +117,12 @@ generate_calibration_task = function(){
         imus:imus,
     }
 
-    console.log(task)
+    task_info = task;
 
     $.post("/api/start_task",  {data:JSON.stringify(task)},
         function (data) {
             task_no = data.task_no;
-            setInterval(update_progress, 1000);
+            interval_handle = setInterval(update_progress, 1000);
         },
         "json"
     );
@@ -131,6 +131,8 @@ generate_calibration_task = function(){
 var task_no = "";
 var offset = 0;
 var request_num_max = 3;
+var task_info = {};
+var interval_handle = null;
 
 update_progress = function(){
     offset_cache = offset
@@ -142,10 +144,13 @@ update_progress = function(){
             method: "GET",
             url: `/api/fetch_output/${task_no}/${offset_cache}`,
             dataType: "json",
-            timeout: 8000,
+            timeout: 10000,
             })
             .done(function( data ) {
-                if(offset!=offset_cache) return
+                if(offset!=offset_cache){
+                    console.log("response too old, ignore")
+                    return
+                } 
                 term.write(data.output.replace(/\n/g,"\r\n"));
                 offset = data.end;
             })

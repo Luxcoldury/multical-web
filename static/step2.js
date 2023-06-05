@@ -66,7 +66,7 @@ loadstep2 = function(){
                     </div>
                 </div>
                 <div class="col-1 step2-imu-apply-config-col d-none">
-                    <button type="button" class="btn btn-primary" href="apply_imu_config_to(${item.bag_index},${item.topic_index})">Apply</button>
+                    <a role="button" class="btn btn-primary" href="apply_imu_config_to(${item.bag_index},${item.topic_index})">Apply</a>
                 </div>
             </div>
         </div>`);
@@ -120,13 +120,13 @@ select_imu_config_for_applying = function(index){
     imu_config_selected_for_applying = external_imu_configs[index]
     $(".step2-imu-ur-col").removeClass("col-2")
     $(".step2-imu-ur-col").addClass("col-1")
-    $("step2-imu-apply-config-col").removeClass("d-none")
+    $(".step2-imu-apply-config-col").removeClass("d-none")
 }
 
 apply_imu_config_to = function(bi,ti){
     $(".step2-imu-ur-col").addClass("col-2")
     $(".step2-imu-ur-col").removeClass("col-1")
-    $("step2-imu-apply-config-col").addClass("d-none")
+    $(".step2-imu-apply-config-col").addClass("d-none")
 
     $(`#imu-${bi}-${ti}-and`).val(imu_config_selected_for_applying.config.and)
     $(`#imu-${bi}-${ti}-arw`).val(imu_config_selected_for_applying.config.arw)

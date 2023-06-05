@@ -66,7 +66,7 @@ loadstep2 = function(){
                     </div>
                 </div>
                 <div class="col-1 step2-imu-apply-config-col d-none">
-                    <a role="button" class="btn btn-primary" href="apply_imu_config_to(${item.bag_index},${item.topic_index})">Apply</a>
+                    <a role="button" class="btn btn-primary" href="javascript:apply_imu_config_to(${item.bag_index},${item.topic_index})">Apply</a>
                 </div>
             </div>
         </div>`);

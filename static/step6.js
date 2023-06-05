@@ -149,7 +149,7 @@ update_progress = function(){
                 term.write(data.output.replace(/\n/g,"\r\n"));
                 offset = data.end;
             })
-            .complete(function() {
+            .always(function() {
                 request_num_max++;
         });
     }

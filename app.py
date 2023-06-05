@@ -69,6 +69,31 @@ def load_cam_configs_files():
 
     return json.dumps(cam_configs)
 
+@app.route('/api/load_imu_configs_files', methods=['GET'])
+def load_imu_configs_files():
+    files = utils.list_files(multical_const.dataset_path)
+    imu_configs = []
+    for file in files:
+        if file["filename"].endswith(".yaml"):
+            with open(file["filefolder"]+'/'+file["filename"],"r") as f:
+                try:
+                    imu_config = {"and":"",
+                                  "arw":"",
+                                  "gnd":"",
+                                  "grw":"",}
+                    
+                    imu_config_src=yaml.load(f,Loader=yaml.FullLoader)
+                    imu_config["and"] = imu_config_src["imu0"]["accelerometer_noise_density"]
+                    imu_config["arw"] = imu_config_src["imu0"]["accelerometer_random_walk"]
+                    imu_config["gnd"] = imu_config_src["imu0"]["gyroscope_noise_density"]
+                    imu_config["grw"] = imu_config_src["imu0"]["gyroscope_random_walk"]
+                except:
+                    continue
+                else:
+                    imu_configs.append({"config_name":file["filename"],"config_folder":file["filefolder"],"config":imu_config})
+
+    return json.dumps(imu_configs)
+
 @app.route('/api/start_task', methods=['POST'])
 def start_task():
     folder = multical_const.dataset_path

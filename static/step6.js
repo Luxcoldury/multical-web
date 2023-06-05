@@ -130,17 +130,27 @@ generate_calibration_task = function(){
 
 var task_no = "";
 var offset = 0;
+var request_num_max = 3;
 
 update_progress = function(){
+    offset_cache = offset
     fitAddon.fit()
-    $.ajax({
-        method: "GET",
-        url: `/api/fetch_output/${task_no}/${offset}`,
-        dataType: "json",
-        timeout: 500,
-      })
-    .done(function( data ) {
-        term.write(data.output.replace(/\n/g,"\r\n"));
-        offset = data.end;
-    });
+
+    if(request_num_max>0){
+        request_num_max--;
+        $.ajax({
+            method: "GET",
+            url: `/api/fetch_output/${task_no}/${offset_cache}`,
+            dataType: "json",
+            timeout: 8000,
+            })
+            .done(function( data ) {
+                if(offset!=offset_cache) return
+                term.write(data.output.replace(/\n/g,"\r\n"));
+                offset = data.end;
+            })
+            .complete(function() {
+                request_num_max++;
+        });
+    }
 }

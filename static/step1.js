@@ -37,6 +37,7 @@ rosbag_searched = function(bag_index,bag_name,bag_size,bag_folder){
 choose_rosbag = function(bag_index){
     if($(`#step1-rosbag-${bag_index}`).hasClass("active")){
         $(`#step1-rosbag-${bag_index}`).removeClass("active")
+        $("#step1-rosbag-"+bag_index+" .spinner-border").addClass("d-none");
         topics = topics.filter(function(item) {
             return item.bag_index != bag_index;
         });
@@ -55,6 +56,7 @@ choose_rosbag = function(bag_index){
             "filename":bags[bag_index].bag_name,
         },
         function (data){
+            if(! $(`#step1-rosbag-${bag_index}`).hasClass("active")) return;
             $("#step1-rosbag-"+bag_index+" .spinner-border").addClass("d-none");
 
             if(data.length == 0) return

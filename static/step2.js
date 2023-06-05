@@ -91,7 +91,7 @@ get_external_imu_configs = function(){
             for(i=0;i<external_imu_configs.length;i++){
                 imu_config = external_imu_configs[i]
 
-                $("#step2-rw-file-list").append(`<div class="list-group-item list-group-item-action step2-rw-file-item">
+                $("#step2-rw-file-list").append(`<div class="list-group-item list-group-item-action step2-rw-file-item" id="step2-rw-file-${i}">
                     <a href="javascript:select_imu_config_for_applying(${i})" class="stretched-link"></a>
                     <div class="row align-items-center">
                         <div class="col">
@@ -121,11 +121,13 @@ select_imu_config_for_applying = function(index){
     $(".step2-imu-ur-col").removeClass("col-2")
     $(".step2-imu-ur-col").addClass("col-1")
     $(".step2-imu-apply-config-col").removeClass("d-none")
+    $(`#step2-rw-file-${index}`).addClass("active")
 }
 
 apply_imu_config_to = function(bi,ti){
     $(".step2-imu-ur-col").addClass("col-2")
     $(".step2-imu-ur-col").removeClass("col-1")
+    $(".step2-rw-file-item").removeClass("active")
     $(".step2-imu-apply-config-col").addClass("d-none")
 
     $(`#imu-${bi}-${ti}-and`).val(imu_config_selected_for_applying.config.and)

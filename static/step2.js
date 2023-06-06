@@ -37,26 +37,26 @@ loadstep2 = function(){
                 </div>
                 <div class="col-2">
                     <div class="form-floating ">
-                        <input type="text" class="form-control" id="imu-${item.bag_index}-${item.topic_index}-and" placeholder="Accelerometer Noise Density">
-                        <label for="imu-${item.bag_index}-${item.topic_index}-and" data-bag-index="${item.bag_index}" data-topic-index="${item.topic_index}">Accelerometer Noise Density</label>
+                        <input type="text" class="form-control" id="imu-${item.bag_index}-${item.topic_index}-and" placeholder="Accel Noise Density">
+                        <label for="imu-${item.bag_index}-${item.topic_index}-and" data-bag-index="${item.bag_index}" data-topic-index="${item.topic_index}">Accel Noise Density</label>
                     </div>
                 </div>
                 <div class="col-2">
                     <div class="form-floating ">
-                        <input type="text" class="form-control" id="imu-${item.bag_index}-${item.topic_index}-arw" placeholder="Accelerometer Random Walk">
-                        <label for="imu-${item.bag_index}-${item.topic_index}-arw" data-bag-index="${item.bag_index}" data-topic-index="${item.topic_index}">Accelerometer Random Walk</label>
+                        <input type="text" class="form-control" id="imu-${item.bag_index}-${item.topic_index}-arw" placeholder="Accel Random Walk">
+                        <label for="imu-${item.bag_index}-${item.topic_index}-arw" data-bag-index="${item.bag_index}" data-topic-index="${item.topic_index}">Accel Random Walk</label>
                     </div>
                 </div>
                 <div class="col-2">
                     <div class="form-floating ">
-                        <input type="text" class="form-control" id="imu-${item.bag_index}-${item.topic_index}-gnd" placeholder="Gyroscope Noise Density">
-                        <label for="imu-${item.bag_index}-${item.topic_index}-gnd" data-bag-index="${item.bag_index}" data-topic-index="${item.topic_index}">Gyroscope Noise Density</label>
+                        <input type="text" class="form-control" id="imu-${item.bag_index}-${item.topic_index}-gnd" placeholder="Gyro Noise Density">
+                        <label for="imu-${item.bag_index}-${item.topic_index}-gnd" data-bag-index="${item.bag_index}" data-topic-index="${item.topic_index}">Gyro Noise Density</label>
                     </div>
                 </div>
                 <div class="col-2">
                     <div class="form-floating ">
-                        <input type="text" class="form-control" id="imu-${item.bag_index}-${item.topic_index}-grw" placeholder="Gyroscope Random Walk">
-                        <label for="imu-${item.bag_index}-${item.topic_index}-grw" data-bag-index="${item.bag_index}" data-topic-index="${item.topic_index}">Gyroscope Random Walk</label>
+                        <input type="text" class="form-control" id="imu-${item.bag_index}-${item.topic_index}-grw" placeholder="Gyro Random Walk">
+                        <label for="imu-${item.bag_index}-${item.topic_index}-grw" data-bag-index="${item.bag_index}" data-topic-index="${item.topic_index}">Gyro Random Walk</label>
                     </div>
                 </div>
                 <div class="col-2 step2-imu-ur-col">

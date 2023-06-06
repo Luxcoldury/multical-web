@@ -120,6 +120,7 @@ select_imu_config_for_applying = function(index){
     imu_config_selected_for_applying = external_imu_configs[index]
     $(".step2-imu-ur-col").removeClass("col-2")
     $(".step2-imu-ur-col").addClass("col-1")
+    $(".step2-rw-file-item").removeClass("active")
     $(".step2-imu-apply-config-col").removeClass("d-none")
     $(`#step2-rw-file-${index}`).addClass("active")
 }

@@ -119,6 +119,8 @@ def start_task():
         f.write("""
 #/bin/bash
 source /catkin_ws/devel/setup.bash
+mkdir -p {1}
+cd {1}
 nohup multical_calibrate_sensors --bag {0} --cams {1}/cameras.yaml {2} --lidars {1}/lidars.yaml --target {1}/target.yaml --no-time-calibration --max-iter=300 \
 > {1}/multical_output.log 2>&1 &
 """.format(task["cameras"]["cam0"]["rosbag"], task_folder, "--imus "+task_folder+"/imus.yaml" if task["imus"].__len__()>0 else ""))

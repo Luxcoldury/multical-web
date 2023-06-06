@@ -5,7 +5,6 @@ term.loadAddon(fitAddon);
 
 $(document).ready(function () {
     term.open(document.getElementById('terminal'));
-    // term.write('Hello from \x1B[1;3;31mxterm.js\x1B[0m $ ')
 })
 
 document.getElementById('multical_carousel').addEventListener('slide.bs.carousel', event => {
@@ -153,6 +152,17 @@ update_progress = function(){
                 } 
                 term.write(data.output.replace(/\n/g,"\r\n"));
                 offset = data.end;
+
+                if(data.output.index_of("PlotCollection.py")>=0){
+                    console.log("x11 window need to be closed")
+                    // x11 window need to be closed
+                }
+
+                if(data.output.index_of("Report written to")>=0){
+                    console.log("calibration succeeded")
+                    bootstrap.Modal($("#calibration-done-modal")).show()
+                    $("#data-folder").innerHTML=task_no
+                }
             })
             .always(function() {
                 request_num_max++;

@@ -153,12 +153,12 @@ update_progress = function(){
                 term.write(data.output.replace(/\n/g,"\r\n"));
                 offset = data.end;
 
-                if(data.output.index_of("PlotCollection.py")>=0){
+                if(data.output.indexOf("PlotCollection.py")>=0){
                     console.log("x11 window need to be closed")
                     // x11 window need to be closed
                 }
 
-                if(data.output.index_of("Report written to")>=0){
+                if(data.output.indexOf("Report written to")>=0){
                     console.log("calibration succeeded")
                     bootstrap.Modal($("#calibration-done-modal")).show()
                     $("#data-folder").innerHTML=task_no

@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+  <header>
+      <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+      
+      <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.2.3/js/bootstrap.bundle.min.js"></script>
+      <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.2.3/css/bootstrap.min.css" rel="stylesheet">
+      
+      <script src="https://cdn.jsdelivr.net/npm/xterm@5.1.0/lib/xterm.min.js"></script>
+      <link href="https://cdn.jsdelivr.net/npm/xterm@5.1.0/css/xterm.min.css" rel="stylesheet">
+      <script src="https://cdn.jsdelivr.net/npm/xterm-addon-fit@0.7.0/lib/xterm-addon-fit.min.js"></script>
+
+      <script src="https://unpkg.com/human-format@1/index.js"></script>
+      <title>{{ const_phrases.title }}</title>
+  </header>
+
+  <body>
+    <!-- header nav bar -->
+    <header class="p-3 text-bg-dark">
+      <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+          <div class="col-md-3 mb-2 mb-md-0"></div>
+          <div class="nav col-md-6 mb-2 align-items-center justify-content-center">
+            <li><a href="#" class="nav-link fs-4 text-white ">{{ const_phrases.title }}</a></li>
+          </div>
+          <div class="col-md-3 mb-2 mb-md-0"></div>
+        </div>
+      </div>
+    </header>
+
+    <div class="container-fluid h-100" "height: 90vh">
+        <div class="container-fluid" style="height: 85%;">
+          {% include step6.html %}
+        </div>
+    </div>
+
+    <script>
+      $(document).ready(function () {
+        running = true;
+        task_no = "{{ task_no }}";
+        interval_handle = setInterval(update_progress, 1000);
+      })
+      
+    </script>
+    
+  </body>
+</html>

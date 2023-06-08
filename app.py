@@ -13,6 +13,10 @@ app = Flask(__name__)
 def hello():
     return render_template('home.html', const_phrases=multical_const.const_phrases)
 
+@app.route('/attach/<str:task_no>')
+def attach(task_no):
+    return render_template('home.html', const_phrases=multical_const.const_phrases, task_no=task_no)
+
 @app.route('/api/search_bags', methods=['GET'])
 def search_bags():
     files = utils.list_files(multical_const.dataset_path)

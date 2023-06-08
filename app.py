@@ -13,7 +13,7 @@ app = Flask(__name__)
 def hello():
     return render_template('home.html', const_phrases=multical_const.const_phrases)
 
-@app.route('/attach/<string:task_no>')
+@app.route('/attach/<task_no>')
 def attach(task_no):
     return render_template('attach.html', const_phrases=multical_const.const_phrases, task_no=task_no)
 

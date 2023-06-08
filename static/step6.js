@@ -7,18 +7,6 @@ $(document).ready(function () {
     term.open(document.getElementById('terminal'));
 })
 
-document.getElementById('multical_carousel').addEventListener('slide.bs.carousel', event => {
-    if(event.to==5){
-        setTimeout(() => {
-            fitAddon.fit()
-        }, 500);
-
-    if(!running){
-        generate_calibration_task()
-    }
-    }
-})
-
 generate_calibration_task = function(){
     running=true
 
@@ -169,3 +157,15 @@ update_progress = function(){
         });
     }
 }
+
+document.getElementById('multical_carousel').addEventListener('slide.bs.carousel', event => {
+    if(event.to==5){
+        setTimeout(() => {
+            fitAddon.fit()
+        }, 500);
+
+    if(!running){
+        generate_calibration_task()
+    }
+    }
+})

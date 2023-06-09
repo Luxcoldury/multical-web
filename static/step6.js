@@ -148,8 +148,9 @@ update_progress = function(){
 
                 if(data.output.indexOf("Report written to")>=0){
                     console.log("calibration succeeded")
-                    bootstrap.Modal($("#calibration-done-modal")).show()
-                    $("#data-folder").innerHTML=task_no
+                    $("#data-folder").append(task_no)
+                    var done_modal = new bootstrap.Modal($("#calibration-done-modal"))
+                    done_modal.show()
                 }
             })
             .always(function() {
